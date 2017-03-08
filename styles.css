@@ -1,0 +1,125 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+
+/***********************************************/
+html, body {
+	width: 100%;
+	font-family: sans-serif;
+	text-align: center;
+	background-color: #F7F7F7;
+}
+section {
+	width:80%;
+	background-color: white;
+	top:50%;
+	left: 10%;
+	position: absolute;
+	transform: translateY(-50%);
+}
+h1{
+  padding: 30px;
+	font-size: 16px;
+}
+
+#denominations {
+	margin: 15px auto;
+	list-style-type: none;
+	display: flex;
+
+	background-color: yellow;
+	flex-wrap:wrap;
+	justify-content:space-between;
+	width:75%;
+}
+
+#denominations > li {
+	background-color: red;
+width: 40%;
+
+position: relative;
+margin-bottom: 40px;
+}
+
+.coinvalueWrapper {
+	background-color: #D8D8D8;
+	color: #878787;
+	text-align: center;
+	border: none;
+	border-radius: 50%;
+
+	width:100%;
+	position: relative;
+}
+.coinvalueWrapper:before{
+    content:'';
+    padding:50% 0; /* vertical value as  100% equals width */
+    display:inline-block;
+}
+
+input[type="number"].coinvalue {
+
+		width: 40%;
+		position: absolute;
+		top:50%;
+		transform: translate(-50%,-50%);
+}
+
+.quantityWrapper {
+	position: absolute;
+	top:0;
+	right: 10%;
+	background-color: black;
+	font-size: 10px;
+	width: 20%;
+	border-radius: 50%;
+}
+.quantityWrapper:before{
+    content:'';
+    padding:50% 0; /* vertical value as  100% equals width */
+    display:inline-block;
+}
+
+.quantity{
+	color: white;
+	position: absolute;
+	width:100%;
+	top:50%;
+	transform: translate(0,-50%);
+}
+
+
+form {
+	width: 100%;
+	margin: 10px 0;
+	background-color: blue;
+}
+
+form > input[type="number"] {
+	width: 75%;
+}
