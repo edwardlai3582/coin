@@ -21,7 +21,9 @@ const counter = {
       });
     },
     valueChanged : function(e){
-      console.log(e.target.value);
+      console.log(e.target.id+"'s value changed to "+e.target.value);
+      var position = parseInt(e.target.id.replace("coin", ""), 10);
+      this.coins[position].value = e.target.value
     },
     start : function(){
       var coinNodes = document.querySelectorAll("#denominations > li");
@@ -33,7 +35,8 @@ const counter = {
         });
       },this);
 
-      this.coins.forEach(function(coin){
+      this.coins.forEach(function(coin, index){
+        coin.node.querySelector("input").id = "coin"+index;
         coin.node.addEventListener('input', this.valueChanged.bind(this));
       },this);
 
