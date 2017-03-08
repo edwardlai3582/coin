@@ -36,11 +36,12 @@ html, body {
 }
 section {
 	width:80%;
-	background-color: white;
-	top:50%;
-	left: 10%;
+	max-width: 600px;
 	position: absolute;
-	transform: translateY(-50%);
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
 }
 h1{
   padding: 30px;
@@ -83,7 +84,8 @@ margin-bottom: 40px;
 }
 
 input[type="number"].coinvalue {
-
+	text-align: center;
+	background-color: inherit;
 		width: 40%;
 		position: absolute;
 		top:50%;
@@ -113,6 +115,9 @@ input[type="number"].coinvalue {
 	transform: translate(0,-50%);
 }
 
+.hide{
+	visibility: hidden;
+}
 
 form {
 	width: 100%;
@@ -122,4 +127,10 @@ form {
 
 form > input[type="number"] {
 	width: 75%;
+	border: none;
+}
+
+#calculate {
+	width: 75%;
+	border: none;
 }

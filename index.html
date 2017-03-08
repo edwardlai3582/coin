@@ -14,44 +14,43 @@
       <ul id="denominations">
         <li>
           <div class="coinvalueWrapper">
-            <input type="number" class="coinvalue" value="25">
+            <input type="number" class="coinvalue" value="5">
           </div>
-          <div class="quantityWrapper">
-            <div class="quantity">1</div>
+          <div class="quantityWrapper hide">
+            <!--<div class="quantity">1</div>-->
+          </div>
+        </li>
+        <li>
+          <div class="coinvalueWrapper">
+            <input type="number" class="coinvalue" value="10">
+          </div>
+          <div class="quantityWrapper hide">
           </div>
         </li>
         <li>
           <div class="coinvalueWrapper">
             <input type="number" class="coinvalue" value="25">
           </div>
-          <div class="quantityWrapper">
-            <div class="quantity">2</div>
+          <div class="quantityWrapper hide">
           </div>
         </li>
         <li>
           <div class="coinvalueWrapper">
-            <input type="number" class="coinvalue" value="25">
+            <input type="number" class="coinvalue" value="1">
           </div>
-          <div class="quantityWrapper">
-            <div class="quantity"></div>
-          </div>
-        </li>
-        <li>
-          <div class="coinvalueWrapper">
-            <input type="number" class="coinvalue" value="25">
-          </div>
-          <div class="quantityWrapper">
-            <div class="quantity">3</div>
+          <div class="quantityWrapper hide">
           </div>
         </li>
       </ul>
-      <form action="" >
-        <input type="number" name="amount">
+      <form action="" id="calculateForm">
+        <input type="number" name="amount" id="amount">
         <br>
-        <button>
+        <button id="calculate">
           CALCULATE
         </button>
       </form>
     </section>
+
+    <script src="app.js"></script>
   </body>
 </html>
