@@ -132,4 +132,4 @@ const counter = {
 };
 
 //pass coin 25, 10, 5
-counter.start([75, 25, 15]);
+counter.start([25, 10, 5]);
