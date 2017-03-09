@@ -43,13 +43,19 @@ const counter = {
       //value validation
       //check 1 exist
       if(this.coins[position].value === 1){
-        console.log("1 coin will always exist");
+        console.log("1 coin always exists");
         this.coins[position].node.querySelector("input").value=this.coins[position].value;
         return;
       }
       //check smaller than 1
       if(parseInt(e.target.value, 10) <1){
         console.log("cant smaller than 1");
+        this.coins[position].node.querySelector("input").value=this.coins[position].value;
+        return;
+      }
+      //check NaN
+      if(e.target.value === ""){
+        console.log("cant be an empty string");
         this.coins[position].node.querySelector("input").value=this.coins[position].value;
         return;
       }
@@ -65,21 +71,29 @@ const counter = {
       }
 
       console.log("start make change");
-      this.coins[position].value = e.target.value
+      this.coins[position].value = e.target.value;
+
+      //re-calculate result
+      this.calculate(document.getElementById('amount').value);
     },
-    start : function(){
-      var coinNodes = document.querySelectorAll("#denominations > li");
-      coinNodes.forEach(function(coinNode){
+    create : function(coinsArray){
+      coinsArray.forEach(function(coin){
+        //create element
+        var li = document.createElement("li");
+        li.innerHTML = '<div class="coinvalueWrapper"><input type="number" class="coinvalue"></div><div class="quantityWrapper hide"></div>';
+        document.getElementById("denominations").appendChild(li);
+        //add coin object to coins
         this.coins.push({
           id: "coin"+this.coins.length,
-          node: coinNode,
-          value: parseInt(coinNode.querySelector("input").value, 10),
+          node: li,
+          value: coin,
           quantity: 0
         });
       },this);
 
       this.coins.forEach(function(coin, index){
         coin.node.querySelector("input").id = coin.id;
+        coin.node.querySelector("input").value = coin.value;
         coin.node.querySelector("input").addEventListener('blur', this.valueChanged.bind(this));
       },this);
 
@@ -92,4 +106,4 @@ const counter = {
     },
 };
 
-counter.start();
+counter.create([25, 10, 5, 1]);
