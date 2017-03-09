@@ -81,7 +81,7 @@ const counter = {
       this.calculate(this.amount.value);
     },
     //start the app
-    create : function(coinsArray){
+    start : function(coinsArray){
       //add default coin 1
       if(coinsArray) {
           coinsArray.push(1);
@@ -96,25 +96,24 @@ const counter = {
           console.log("illegal value")
           return;
         }
+
+        /*
         //create element
         var li = document.createElement("li");
         li.innerHTML = '<div class="coinvalueWrapper"><input type="number" class="coinvalue"></div><div class="quantityWrapper hide"></div>';
         document.getElementById("denominations").appendChild(li);
-        //add coin object to coins
-        this.coins.push({
-          id: "coin"+this.coins.length,
-          node: li,
-          value: coin,
-          quantity: 0
-        });
-      },this);
+        */
 
+        //add coin object to coins
+        this.coins.push(new Coin("coin"+this.coins.length, coin, this.valueChanged.bind(this), document.getElementById("denominations")));
+      },this);
+      /*
       this.coins.forEach(function(coin, index){
         coin.node.querySelector("input").id = coin.id;
         coin.node.querySelector("input").value = coin.value;
         coin.node.querySelector("input").addEventListener('blur', this.valueChanged.bind(this));
       },this);
-
+      */
       console.log(this.coins);
       this.amount = document.getElementById("amount");
 
@@ -127,4 +126,4 @@ const counter = {
 };
 
 //pass coin 25, 10, 5
-counter.create([25, 10, 5]);
+counter.start([25, 10, 5]);

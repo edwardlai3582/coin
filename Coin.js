@@ -1,25 +1,18 @@
-function Coin (index, value, element){
-  this.id = "coin"+index;
+function Coin (id, value, valueChanged, parentNode){
+  this.id = id;
   this.value = value;
-  this.element = element;
+  this.quantity = 0;
+  //add node
+  //create element
+  var li = document.createElement("li");
+  li.innerHTML = '<div class="coinvalueWrapper"><input type="number" class="coinvalue"></div><div class="quantityWrapper hide"></div>';
 
-};
 
-Coin.prototype.getName = function() {
-    return this.name;
-};
+  li.querySelector("input").id = this.id;
+  li.querySelector("input").value = this.value;
+  li.querySelector("input").addEventListener('blur', valueChanged);
 
-Coin.prototype.getValue = function() {
-    return parseInt(this.value, 10);
-};
+  parentNode.appendChild(li);
 
-Coin.prototype.handleEvent = function(event) {
-    switch (event.type) {
-        case "change": this.change(this.element.value);
-    }
-};
-
-Coin.prototype.change = function(value) {
-    this.data = value;
-    this.element.value = value;
+  this.node = li;
 };
