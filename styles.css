@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 /* reset */
-html, body, div, h1, ul, li,form{
+html, body, div, h1, ul, li, form{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -74,9 +74,8 @@ h1{
 	border:none;
 	color: #8F8F8F;
 	font-size: 24px;
-	-moz-appearance:textfield;
+	-moz-appearance: textfield;
 }
-
 .coinvalue::-webkit-outer-spin-button,
 .coinvalue::-webkit-inner-spin-button {
     -webkit-appearance: none;

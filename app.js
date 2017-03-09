@@ -25,6 +25,11 @@ const counter = {
         amount = amount %  this.coins[i].getValue();
       }
 
+      //DP
+      /*
+
+      */
+
       //display result
       this.clearQuantities();
       this.coins.forEach(function(coin){
@@ -108,4 +113,4 @@ const counter = {
 };
 
 //pass coin 25, 10, 5
-counter.start([25, 10, 5]);
+counter.start([235, 10, 5]);
