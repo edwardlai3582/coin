@@ -1,12 +1,14 @@
 const counter = {
     coins : [],
     amount : 0,
+    //clear previous result
     clearQuantities: function(){
       this.coins.forEach(function(coin){
         coin.node.getElementsByClassName("quantityWrapper")[0].innerHTML = "";
         coin.node.getElementsByClassName("quantityWrapper")[0].className = "quantityWrapper hide";
       });
     },
+    //calculate new result
     calculate : function(amount){
       amount = parseInt(amount, 10);
 
@@ -34,6 +36,7 @@ const counter = {
       });
       console.log("/////////////////")
     },
+    //called when coin's value changed
     valueChanged : function(e){
       console.log(e.target.id+"'s value changed to "+e.target.value);
       var targetValue = parseInt(e.target.value, 10);
@@ -70,14 +73,20 @@ const counter = {
         }
       }
 
-      console.log("start make change");
+      //set new value
       this.coins[position].value = targetValue;
 
       //re-calculate result
       this.calculate(this.amount.value);
     },
+    //start the app
     create : function(coinsArray){
       coinsArray.forEach(function(coin){
+        //validation
+        if(isNaN(coin)||(coin<1)){
+          console.log("illegal value")
+          return;
+        }
         //create element
         var li = document.createElement("li");
         li.innerHTML = '<div class="coinvalueWrapper"><input type="number" class="coinvalue"></div><div class="quantityWrapper hide"></div>';
@@ -99,6 +108,8 @@ const counter = {
 
       console.log(this.coins);
       this.amount = document.getElementById("amount");
+
+      //add event linstener for calculation
       document.getElementById("calculateForm").addEventListener('submit', function(e){
         e.preventDefault();
         this.calculate(this.amount.value);
@@ -106,4 +117,5 @@ const counter = {
     },
 };
 
+//pass coin 25, 10, 5, 1
 counter.create([25, 10, 5, 1]);
