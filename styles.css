@@ -22,7 +22,7 @@ section {
 	width: 80%;
 	max-width: 600px;
 	position: absolute;
-	top:50%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background-color: white;
@@ -137,8 +137,21 @@ form {
 	margin: 30px 0;
 }
 
+/* height 2 short */
+@media only screen and ( max-height: 560px ){
+    section {
+			max-width: 600px;
+			top: 0;
+			transform: translate(-50%, 0);
+		}
+}
+
 /* small devices */
 @media only screen and (max-width : 480px) {
+	html, body {
+		background-color: white;
+	}
+
 	section {
 		width: 100%;
 		position: relative;
