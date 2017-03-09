@@ -62,7 +62,7 @@ const counter = {
     },
     //called when coin's value changed
     valueChanged : function(e){
-      var targetValue = parseInt(e.target.value, 10);
+      var targetValue = Number(e.target.value);
       //search coin
       var position = this.coins.map(function(coin){return coin.getId();}).indexOf(e.target.id);
 
@@ -70,6 +70,12 @@ const counter = {
       //check 1 exist
       if(this.coins[position].getValue() === 1){
         console.log("INVALID: 1 coin always exists");
+        this.coins[position].resetInputValue();
+        return;
+      }
+      //check integer
+      if(!Number.isInteger(targetValue)){
+        console.log("INVALID: need to be an integer");
         this.coins[position].resetInputValue();
         return;
       }
