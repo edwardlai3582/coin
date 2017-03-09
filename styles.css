@@ -19,7 +19,7 @@ html, body {
 
 section {
 	display: block;
-	width:80%;
+	width: 80%;
 	max-width: 600px;
 	position: absolute;
 	top:50%;
@@ -43,10 +43,9 @@ h1{
 }
 
 #denominations > li {
-width: 40%;
-
-position: relative;
-margin-bottom: 40px;
+	width: 40%;
+	position: relative;
+	margin-bottom: 40px;
 }
 
 .coinvalueWrapper {
@@ -55,25 +54,25 @@ margin-bottom: 40px;
 	text-align: center;
 	border: none;
 	border-radius: 50%;
-
 	width:100%;
 	position: relative;
 }
 .coinvalueWrapper:before{
-    content:'';
-    padding:50% 0; /* vertical value as  100% equals width */
-    display:inline-block;
+	content:'';
+	padding:50% 0; /* vertical value as  100% equals width */
+	display:inline-block;
 }
 
 input[type="number"].coinvalue {
 	text-align: center;
 	background-color: inherit;
-		width: 40%;
-		position: absolute;
-		top:50%;
-		transform: translate(-50%,-50%);
-		/*border:none;*/
-		color: #8F8F8F;
+	width: 40%;
+	position: absolute;
+	top:50%;
+	transform: translate(-50%,-50%);
+	/*border:none;*/
+	color: #8F8F8F;
+	font-size: 16px;
 }
 
 .quantityWrapper {
@@ -86,9 +85,9 @@ input[type="number"].coinvalue {
 	border-radius: 50%;
 }
 .quantityWrapper:before{
-    content:'';
-    padding:50% 0; /* vertical value as  100% equals width */
-    display:inline-block;
+	content:'';
+	padding:50% 0; /* vertical value as  100% equals width */
+	display:inline-block;
 }
 
 .quantity{
@@ -106,7 +105,6 @@ input[type="number"].coinvalue {
 form {
 	width: 75%;
 	margin: 0 auto;
-
 }
 
 #amount {
@@ -118,7 +116,7 @@ form {
 	border: 1px;
 	border-style: solid;
 	border-color: #D8D8D8;
-	font-weight: bold;
+	font-size: 20px;
 }
 
 #calculate {
