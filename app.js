@@ -4,8 +4,7 @@ const counter = {
     //clear previous result
     clearQuantities: function(){
       this.coins.forEach(function(coin){
-        coin.node.getElementsByClassName("quantityWrapper")[0].innerHTML = "";
-        coin.node.getElementsByClassName("quantityWrapper")[0].className = "quantityWrapper hide";
+        coin.clearQuantity();
       });
     },
     //calculate new result
@@ -39,43 +38,42 @@ const counter = {
     },
     //called when coin's value changed
     valueChanged : function(e){
-      console.log(e.target.id+"'s value changed to "+e.target.value);
       var targetValue = parseInt(e.target.value, 10);
       //search coin
-      var position = this.coins.map(function(coin){return coin.id;}).indexOf(e.target.id);
+      var position = this.coins.map(function(coin){return coin.getId();}).indexOf(e.target.id);
 
       //value validation
       //check 1 exist
-      if(this.coins[position].value === 1){
-        console.log("1 coin always exists");
-        this.coins[position].node.querySelector("input").value=this.coins[position].value;
+      if(this.coins[position].getValue() === 1){
+        console.log("INVALID: 1 coin always exists");
+        this.coins[position].resetInputValue();
         return;
       }
       //check smaller than 1
-      if(targetValue <1){
-        console.log("cant be smaller than 1");
-        this.coins[position].node.querySelector("input").value=this.coins[position].value;
+      if(targetValue < 1){
+        console.log("INVALID: cant be smaller than 1");
+        this.coins[position].resetInputValue();
         return;
       }
       //check NaN
-      if(e.target.value === ""){
-        console.log("cant be an empty string");
-        this.coins[position].node.querySelector("input").value=this.coins[position].value;
+      if(isNaN(targetValue)){
+        console.log("INVALID: cant be an NaN");
+        this.coins[position].resetInputValue();
         return;
       }
       //check duplicate value
       for(var i=0; i<this.coins.length; i++){
         if(i !== position){
-          if(this.coins[i].value === targetValue){
-            console.log("duplicate value");
-            this.coins[position].node.querySelector("input").value=this.coins[position].value;
+          if(this.coins[i].getValue() === targetValue){
+            console.log("INVALID: duplicate value");
+            this.coins[position].resetInputValue();
             return;
           }
         }
       }
 
       //set new value
-      this.coins[position].value = targetValue;
+      this.coins[position].setValue(targetValue);
 
       //re-calculate result
       this.calculate(this.amount.value);
@@ -97,7 +95,7 @@ const counter = {
           return;
         }
 
-        //add coin object to coins
+        //add Coin object to coins
         this.coins.push(new Coin("coin"+this.coins.length, coin, this.valueChanged.bind(this), document.getElementById("denominations")));
       },this);
 

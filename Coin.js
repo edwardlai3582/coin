@@ -11,3 +11,24 @@ function Coin (id, value, valueChanged, parentNode){
   parentNode.appendChild(li);
   this.node = li;
 };
+
+Coin.prototype.getId = function(){
+  return this.id;
+};
+
+Coin.prototype.getValue = function(){
+  return this.value;
+};
+
+Coin.prototype.setValue = function(value){
+  this.value = value;
+};
+
+Coin.prototype.resetInputValue = function(){
+  this.node.querySelector("input").value = this.getValue();
+};
+
+Coin.prototype.clearQuantity = function(){
+  this.node.getElementsByClassName("quantityWrapper")[0].innerHTML = "";
+  this.node.getElementsByClassName("quantityWrapper")[0].className = "quantityWrapper hide";
+};
