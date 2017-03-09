@@ -4,7 +4,7 @@ const counter = {
     //clear previous result
     clearQuantities: function(){
       this.coins.forEach(function(coin){
-        coin.clearQuantity();
+        coin.clearNodeQuantity();
       });
     },
     //calculate new result
@@ -18,28 +18,47 @@ const counter = {
         return;
       }
 
-      //greedy not 100% correct
-      this.coins.sort(function(c1, c2) {return c2.getValue() - c1.getValue();});
-      for(var i=0; i<this.coins.length; i++){
-        this.coins[i].setQuantity(Math.floor(amount / this.coins[i].getValue()));
-        amount = amount %  this.coins[i].getValue();
+      //DP
+      //set array for dynamic programming
+      this.coins.sort(function(c1, c2) {return c1.getValue()-c2.getValue();});
+      var dp=[];
+      for(var i=0; i<=amount; i++){
+        var qq={coins:{}};
+        for(var j=0; j<this.coins.length; j++){
+          if(this.coins[j].value === 1){qq['coins'][this.coins[j].value]=i; qq.total=i}
+          else{qq['coins'][this.coins[j].value]=0}
+        }
+        dp.push(qq);
       }
 
-      //DP
-      /*
-
-      */
+      for(var i=0; i<=amount; i++){
+        for(var j=0; j<this.coins.length; j++){
+          if(this.coins[j].getValue() + i <= amount  ){
+            if(dp[i + this.coins[j].getValue()].total > dp[i].total + 1){
+               dp[i + this.coins[j].getValue()]['coins'] = Object.assign({},dp[i]['coins']);
+               dp[i + this.coins[j].getValue()]['coins'][this.coins[j].getValue()]++;
+               dp[i + this.coins[j].getValue()].total = dp[i].total + 1;
+            }
+          }
+        }
+      }
+      console.log(dp);
+      Object.keys(dp[dp.length-1].coins).map(function(coinValue){
+          for(var i=0; i<this.coins.length; i++){
+              if(this.coins[i].getValue() === parseInt(coinValue, 10)){
+                this.coins[i].setQuantity(dp[dp.length-1].coins[coinValue]);
+                return;
+              }
+          }
+      },this);
 
       //display result
       this.clearQuantities();
       this.coins.forEach(function(coin){
-        if(coin.quantity !== 0){
-          console.log(coin.value+" x "+coin.quantity);
-          coin.node.getElementsByClassName("quantityWrapper")[0].innerHTML = '<div class="quantity">'+coin.quantity+'</div>';
-          coin.node.getElementsByClassName("quantityWrapper")[0].className = "quantityWrapper";
+        if(coin.getQuantity() !== 0){
+          coin.setNodeQuantity();
         }
       });
-      console.log("/////////////////")
     },
     //called when coin's value changed
     valueChanged : function(e){
@@ -113,4 +132,4 @@ const counter = {
 };
 
 //pass coin 25, 10, 5
-counter.start([235, 10, 5]);
+counter.start([75, 25, 15]);

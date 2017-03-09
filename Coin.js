@@ -24,6 +24,10 @@ Coin.prototype.setValue = function(value){
   this.value = value;
 };
 
+Coin.prototype.getQuantity = function(){
+  return this.quantity;
+};
+
 Coin.prototype.setQuantity = function(quantity){
   this.quantity = quantity;
 };
@@ -32,7 +36,12 @@ Coin.prototype.resetInputValue = function(){
   this.node.querySelector("input").value = this.getValue();
 };
 
-Coin.prototype.clearQuantity = function(){
+Coin.prototype.clearNodeQuantity = function(){
   this.node.getElementsByClassName("quantityWrapper")[0].innerHTML = "";
   this.node.getElementsByClassName("quantityWrapper")[0].className = "quantityWrapper hide";
+};
+
+Coin.prototype.setNodeQuantity = function(){
+  this.node.getElementsByClassName("quantityWrapper")[0].innerHTML = '<div class="quantity">'+this.quantity+'</div>';
+  this.node.getElementsByClassName("quantityWrapper")[0].className = "quantityWrapper";
 };
