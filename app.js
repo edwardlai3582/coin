@@ -18,7 +18,6 @@ const counter = {
         return;
       }
 
-      //DP
       //set array for dynamic programming
       this.coins.sort(function(c1, c2) {return c1.getValue() - c2.getValue();});
       var dp=[];
@@ -30,7 +29,7 @@ const counter = {
         }
         dp.push(qq);
       }
-
+      //DP
       for(var i=0; i<=amount; i++){
         for(var j=0; j<this.coins.length; j++){
           if(this.coins[j].getValue() + i <= amount  ){
@@ -43,6 +42,7 @@ const counter = {
         }
       }
       console.log(dp);
+      //set result
       Object.keys(dp[dp.length-1].coins).map(function(coinValue){
           for(var i=0; i<this.coins.length; i++){
               if(this.coins[i].getValue() === parseInt(coinValue, 10)){
