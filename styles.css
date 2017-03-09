@@ -63,16 +63,24 @@ h1{
 	display:inline-block;
 }
 
-input[type="number"].coinvalue {
+.coinvalue {
+	box-sizing : border-box;
 	text-align: center;
 	background-color: inherit;
-	width: 40%;
+	width: 90%;
 	position: absolute;
 	top:50%;
 	transform: translate(-50%,-50%);
-	/*border:none;*/
+	border:none;
 	color: #8F8F8F;
-	font-size: 16px;
+	font-size: 24px;
+	-moz-appearance:textfield;
+}
+
+.coinvalue::-webkit-outer-spin-button,
+.coinvalue::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .quantityWrapper {
@@ -96,6 +104,7 @@ input[type="number"].coinvalue {
 	width:100%;
 	top:50%;
 	transform: translate(0,-50%);
+	font-size: 20px;
 }
 
 .hide{
@@ -136,5 +145,13 @@ form {
 		top: 0;
 		left: 0;
 		transform: translate(0, 0);
+	}
+
+	.coinvalue {
+		font-size: 16px;
+	}
+
+	.quantity {
+		font-size: 10px;
 	}
 }

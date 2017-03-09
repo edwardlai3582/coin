@@ -15,6 +15,7 @@ const counter = {
       //check amount
       if(isNaN(amount)||(amount<1)){
         console.log("illegal amount: "+amount);
+        this.amount.value = "";
         return;
       }
 
@@ -52,7 +53,7 @@ const counter = {
       }
       //check smaller than 1
       if(targetValue <1){
-        console.log("cant smaller than 1");
+        console.log("cant be smaller than 1");
         this.coins[position].node.querySelector("input").value=this.coins[position].value;
         return;
       }
@@ -66,7 +67,7 @@ const counter = {
       for(var i=0; i<this.coins.length; i++){
         if(i !== position){
           if(this.coins[i].value === targetValue){
-            console.log("duplicate");
+            console.log("duplicate value");
             this.coins[position].node.querySelector("input").value=this.coins[position].value;
             return;
           }
