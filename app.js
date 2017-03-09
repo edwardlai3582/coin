@@ -13,16 +13,16 @@ const counter = {
 
       //check amount
       if(isNaN(amount)||(amount<1)){
-        console.log("illegal amount: "+amount);
+        console.log("ILLEGAL AMOUNT: "+amount);
         this.amount.value = "";
         return;
       }
 
       //greedy not 100% correct
-      this.coins.sort(function(c1, c2) {return c2.value - c1.value;});
+      this.coins.sort(function(c1, c2) {return c2.getValue() - c1.getValue();});
       for(var i=0; i<this.coins.length; i++){
-        this.coins[i].quantity = Math.floor(amount / this.coins[i].value);
-        amount = amount %  this.coins[i].value;
+        this.coins[i].setQuantity(Math.floor(amount / this.coins[i].getValue()));
+        amount = amount %  this.coins[i].getValue();
       }
 
       //display result
@@ -94,7 +94,6 @@ const counter = {
           console.log("illegal value")
           return;
         }
-
         //add Coin object to coins
         this.coins.push(new Coin("coin"+this.coins.length, coin, this.valueChanged.bind(this), document.getElementById("denominations")));
       },this);
