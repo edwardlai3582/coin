@@ -83,7 +83,13 @@ const counter = {
     //start the app
     create : function(coinsArray){
       //add default coin 1
-      coinsArray.push(1);
+      if(coinsArray) {
+          coinsArray.push(1);
+      }
+      else {
+          coinsArray = [1];
+      }
+
       coinsArray.forEach(function(coin){
         //validation
         if(isNaN(coin)||(coin<1)){
@@ -121,5 +127,4 @@ const counter = {
 };
 
 //pass coin 25, 10, 5
-//1 is default
 counter.create([25, 10, 5]);
