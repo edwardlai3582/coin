@@ -81,7 +81,7 @@ const counter = {
     //start the app
     start : function(coinsArray){
       //add default coin 1
-      if(coinsArray) {
+      if(Array.isArray(coinsArray)) {
           coinsArray.push(1);
       }
       else {
