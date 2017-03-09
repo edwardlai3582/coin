@@ -36,7 +36,7 @@ const counter = {
     },
     valueChanged : function(e){
       console.log(e.target.id+"'s value changed to "+e.target.value);
-
+      var targetValue = parseInt(e.target.value, 10);
       //search coin
       var position = this.coins.map(function(coin){return coin.id;}).indexOf(e.target.id);
 
@@ -48,7 +48,7 @@ const counter = {
         return;
       }
       //check smaller than 1
-      if(parseInt(e.target.value, 10) <1){
+      if(targetValue <1){
         console.log("cant smaller than 1");
         this.coins[position].node.querySelector("input").value=this.coins[position].value;
         return;
@@ -62,7 +62,7 @@ const counter = {
       //check duplicate value
       for(var i=0; i<this.coins.length; i++){
         if(i !== position){
-          if(this.coins[i].value === parseInt(e.target.value, 10)){
+          if(this.coins[i].value === targetValue){
             console.log("duplicate");
             this.coins[position].node.querySelector("input").value=this.coins[position].value;
             return;
@@ -71,10 +71,10 @@ const counter = {
       }
 
       console.log("start make change");
-      this.coins[position].value = e.target.value;
+      this.coins[position].value = targetValue;
 
       //re-calculate result
-      this.calculate(document.getElementById('amount').value);
+      this.calculate(this.amount.value);
     },
     create : function(coinsArray){
       coinsArray.forEach(function(coin){
@@ -101,7 +101,7 @@ const counter = {
       this.amount = document.getElementById("amount");
       document.getElementById("calculateForm").addEventListener('submit', function(e){
         e.preventDefault();
-        this.calculate(document.getElementById('amount').value);
+        this.calculate(this.amount.value);
       }.bind(this));
     },
 };
