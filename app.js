@@ -22,12 +22,17 @@ const counter = {
       this.coins.sort(function(c1, c2) {return c1.getValue() - c2.getValue();});
       var dp=[];
       for(var i=0; i<=amount; i++){
-        var qq={coins:{}};
+        var temp={coins:{}};
         for(var j=0; j<this.coins.length; j++){
-          if(this.coins[j].value === 1){qq['coins'][this.coins[j].value]=i; qq.total=i}
-          else{qq['coins'][this.coins[j].value]=0}
+          if(this.coins[j].value === 1){
+            temp['coins'][this.coins[j].value]=i;
+            temp.total=i;
+          }
+          else{
+            temp['coins'][this.coins[j].value]=0;
+          }
         }
-        dp.push(qq);
+        dp.push(temp);
       }
       //DP
       for(var i=0; i<=amount; i++){
