@@ -24,6 +24,10 @@ Coin.prototype.setValue = function(value){
   this.value = value;
 };
 
+Coin.prototype.setQuantity = function(quantity){
+  this.quantity = quantity;
+};
+
 Coin.prototype.resetInputValue = function(){
   this.node.querySelector("input").value = this.getValue();
 };
