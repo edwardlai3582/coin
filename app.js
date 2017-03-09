@@ -20,7 +20,7 @@ const counter = {
 
       //DP
       //set array for dynamic programming
-      this.coins.sort(function(c1, c2) {return c1.getValue()-c2.getValue();});
+      this.coins.sort(function(c1, c2) {return c1.getValue() - c2.getValue();});
       var dp=[];
       for(var i=0; i<=amount; i++){
         var qq={coins:{}};
