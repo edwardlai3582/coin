@@ -7,8 +7,40 @@ const counter = {
         coin.clearNodeQuantity();
       });
     },
+    //dynamic programming
+    dp: function(amount, coinsArray){
+      var dp=[];
+      for(var i=0; i<=amount; i++){
+        var temp={coins:{}};
+        for(var j=0; j<coinsArray.length; j++){
+          //worst case: only use 1s    
+          if(coinsArray[j].value === 1){
+            temp['coins'][coinsArray[j].value]=i;
+            temp.total=i;
+          }
+          else{
+            temp['coins'][coinsArray[j].value]=0;
+          }
+        }
+        dp.push(temp);
+      }
+      
+      for(var i=0; i<=amount; i++){
+        for(var j=0; j<coinsArray.length; j++){
+          if(coinsArray[j].getValue() + i <= amount  ){
+            if(dp[i + coinsArray[j].getValue()].total > dp[i].total + 1){
+               dp[i + coinsArray[j].getValue()]['coins'] = Object.assign({},dp[i]['coins']);
+               dp[i + coinsArray[j].getValue()]['coins'][coinsArray[j].getValue()]+=1;
+               dp[i + coinsArray[j].getValue()].total = dp[i].total + 1;
+            }
+          }
+        }
+      } 
+    
+      return dp[dp.length-1];    
+    },
     //calculate new result
-    calculate : function(amount){
+    calculateResult : function(amount){
       amount = parseInt(amount, 10);
 
       //check amount
@@ -17,41 +49,17 @@ const counter = {
         this.amount.value = "";
         return;
       }
-
-      //set array for dynamic programming
+        
+      //dp    
       this.coins.sort(function(c1, c2) {return c1.getValue() - c2.getValue();});
-      var dp=[];
-      for(var i=0; i<=amount; i++){
-        var temp={coins:{}};
-        for(var j=0; j<this.coins.length; j++){
-          if(this.coins[j].value === 1){
-            temp['coins'][this.coins[j].value]=i;
-            temp.total=i;
-          }
-          else{
-            temp['coins'][this.coins[j].value]=0;
-          }
-        }
-        dp.push(temp);
-      }
-      //DP
-      for(var i=0; i<=amount; i++){
-        for(var j=0; j<this.coins.length; j++){
-          if(this.coins[j].getValue() + i <= amount  ){
-            if(dp[i + this.coins[j].getValue()].total > dp[i].total + 1){
-               dp[i + this.coins[j].getValue()]['coins'] = Object.assign({},dp[i]['coins']);
-               dp[i + this.coins[j].getValue()]['coins'][this.coins[j].getValue()]++;
-               dp[i + this.coins[j].getValue()].total = dp[i].total + 1;
-            }
-          }
-        }
-      }
+      var dp = this.dp(amount, this.coins);    
       console.log(dp);
+      
       //set result
-      Object.keys(dp[dp.length-1].coins).map(function(coinValue){
+      Object.keys(dp.coins).map(function(coinValue){
           for(var i=0; i<this.coins.length; i++){
               if(this.coins[i].getValue() === parseInt(coinValue, 10)){
-                this.coins[i].setQuantity(dp[dp.length-1].coins[coinValue]);
+                this.coins[i].setQuantity(dp.coins[coinValue]);
                 return;
               }
           }
@@ -111,7 +119,7 @@ const counter = {
       this.coins[position].setValue(targetValue);
 
       //re-calculate result
-      this.calculate(this.amount.value);
+      this.calculateResult(this.amount.value);
     },
     //start the app
     start : function(coinsArray){
@@ -137,7 +145,7 @@ const counter = {
       //add event linstener for calculation
       document.getElementById("calculateForm").addEventListener('submit', function(e){
         e.preventDefault();
-        this.calculate(this.amount.value);
+        this.calculateResult(this.amount.value);
       }.bind(this));
     },
 };
