@@ -47,6 +47,7 @@ const counter = {
       if(isNaN(amount)||(amount<1)){
         console.log("ILLEGAL AMOUNT: "+amount);
         this.amount.value = "";
+        this.clearQuantities();
         return;
       }
         
