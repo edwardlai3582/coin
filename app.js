@@ -13,7 +13,7 @@ const counter = {
       for(var i=0; i<=amount; i++){
         var temp={coins:{}};
         for(var j=0; j<coinsArray.length; j++){
-          //worst case: only use 1s    
+          //worst case: only use 1s
           if(coinsArray[j].value === 1){
             temp['coins'][coinsArray[j].value]=i;
             temp.total=i;
@@ -24,7 +24,7 @@ const counter = {
         }
         dp.push(temp);
       }
-      
+
       for(var i=0; i<=amount; i++){
         for(var j=0; j<coinsArray.length; j++){
           if(coinsArray[j].getValue() + i <= amount  ){
@@ -35,9 +35,9 @@ const counter = {
             }
           }
         }
-      } 
-    
-      return dp[dp.length-1];    
+      }
+
+      return dp[dp.length-1];
     },
     //calculate new result
     calculateResult : function(amount){
@@ -50,20 +50,20 @@ const counter = {
         this.clearQuantities();
         return;
       }
-        
-      //dp    
+
+      //dp
       this.coins.sort(function(c1, c2) {return c1.getValue() - c2.getValue();});
-      var dp = this.dp(amount, this.coins);    
+      var dp = this.dp(amount, this.coins);
       console.log(dp);
-      
+
       //set result
-      Object.keys(dp.coins).map(function(coinValue){
-          for(var i=0; i<this.coins.length; i++){
-              if(this.coins[i].getValue() === parseInt(coinValue, 10)){
-                this.coins[i].setQuantity(dp.coins[coinValue]);
-                return;
-              }
+      Object.keys(dp.coins).forEach(function(coinValue){
+        for(var i=0; i<this.coins.length; i++){
+          if(this.coins[i].getValue() === parseInt(coinValue, 10)){
+            this.coins[i].setQuantity(dp.coins[coinValue]);
+            return;
           }
+        }
       },this);
 
       //display result
@@ -74,7 +74,7 @@ const counter = {
         }
       });
     },
-    //value validation 
+    //value validation
     validValue: function(targetValue, position, coinsArray){
       var validResult = "";
       //check 1 exist
@@ -100,27 +100,27 @@ const counter = {
             return "INVALID: duplicate value";
           }
         }
-      } 
-      //pass all testcases    
-      return "";        
+      }
+      //pass all testcases
+      return "";
     },
     //called when coin's value changed
     valueChanged : function(e){
       var targetValue = Number(e.target.value);
       //search coin
       var position = this.coins.map(function(coin){return coin.getId();}).indexOf(e.target.id);
-      //value validation  
-      var validResult = this.validValue(targetValue, position, this.coins);   
+      //value validation
+      var validResult = this.validValue(targetValue, position, this.coins);
       if(validResult === ""){
         //set new value
         this.coins[position].setValue(targetValue);
         //re-calculate result
-        this.calculateResult(this.amount.value);         
-      }        
+        this.calculateResult(this.amount.value);
+      }
       else{
         console.log(validResult);
-        this.coins[position].resetInputValue();    
-      }   
+        this.coins[position].resetInputValue();
+      }
     },
     //start the app
     start : function(coinsArray){
