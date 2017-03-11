@@ -73,53 +73,53 @@ const counter = {
         }
       });
     },
+    //value validation 
+    validValue: function(targetValue, position, coinsArray){
+      var validResult = "";
+      //check 1 exist
+      if(coinsArray[position].getValue() === 1){
+        return "INVALID: 1 coin always exists";
+      }
+      //check integer
+      if(!Number.isInteger(targetValue)){
+        return "INVALID: need to be an integer";
+      }
+      //check smaller than 1
+      if(targetValue < 1){
+        return "INVALID: cant be smaller than 1";
+      }
+      //check NaN
+      if(isNaN(targetValue)){
+        return "INVALID: cant be an NaN";
+      }
+      //check duplicate value
+      for(var i=0; i<this.coins.length; i++){
+        if(i !== position){
+          if(coinsArray[i].getValue() === targetValue){
+            return "INVALID: duplicate value";
+          }
+        }
+      } 
+      //pass all testcases    
+      return "";        
+    },
     //called when coin's value changed
     valueChanged : function(e){
       var targetValue = Number(e.target.value);
       //search coin
       var position = this.coins.map(function(coin){return coin.getId();}).indexOf(e.target.id);
-
-      //value validation
-      //check 1 exist
-      if(this.coins[position].getValue() === 1){
-        console.log("INVALID: 1 coin always exists");
-        this.coins[position].resetInputValue();
-        return;
-      }
-      //check integer
-      if(!Number.isInteger(targetValue)){
-        console.log("INVALID: need to be an integer");
-        this.coins[position].resetInputValue();
-        return;
-      }
-      //check smaller than 1
-      if(targetValue < 1){
-        console.log("INVALID: cant be smaller than 1");
-        this.coins[position].resetInputValue();
-        return;
-      }
-      //check NaN
-      if(isNaN(targetValue)){
-        console.log("INVALID: cant be an NaN");
-        this.coins[position].resetInputValue();
-        return;
-      }
-      //check duplicate value
-      for(var i=0; i<this.coins.length; i++){
-        if(i !== position){
-          if(this.coins[i].getValue() === targetValue){
-            console.log("INVALID: duplicate value");
-            this.coins[position].resetInputValue();
-            return;
-          }
-        }
-      }
-
-      //set new value
-      this.coins[position].setValue(targetValue);
-
-      //re-calculate result
-      this.calculateResult(this.amount.value);
+      //value validation  
+      var validResult = this.validValue(targetValue, position, this.coins);   
+      if(validResult === ""){
+        //set new value
+        this.coins[position].setValue(targetValue);
+        //re-calculate result
+        this.calculateResult(this.amount.value);         
+      }        
+      else{
+        console.log(validResult);
+        this.coins[position].resetInputValue();    
+      }   
     },
     //start the app
     start : function(coinsArray){
@@ -150,5 +150,7 @@ const counter = {
     },
 };
 
-//pass coin 25, 10, 5
-counter.start([25, 10, 5]);
+window.onload = function() {
+  //pass coin 25, 10, 5
+  counter.start([25, 10, 5]);
+};
