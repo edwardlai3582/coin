@@ -37,11 +37,11 @@ Coin.prototype.resetInputValue = function(){
 };
 
 Coin.prototype.clearNodeQuantity = function(){
-  this.node.getElementsByClassName("quantityWrapper")[0].innerHTML = "";
-  this.node.getElementsByClassName("quantityWrapper")[0].className = "quantityWrapper hide";
+  this.node.querySelector(".quantityWrapper").innerHTML = "";
+  this.node.querySelector(".quantityWrapper").className = "quantityWrapper hide";
 };
 
 Coin.prototype.setNodeQuantity = function(){
-  this.node.getElementsByClassName("quantityWrapper")[0].innerHTML = '<div class="quantity">'+this.quantity+'</div>';
-  this.node.getElementsByClassName("quantityWrapper")[0].className = "quantityWrapper";
+  this.node.querySelector(".quantityWrapper").innerHTML = '<div class="quantity">'+this.quantity+'</div>';
+  this.node.querySelector(".quantityWrapper").className = "quantityWrapper";
 };
