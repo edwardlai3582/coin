@@ -52,7 +52,6 @@ const counter = {
       }
 
       //dp
-      this.coins.sort(function(c1, c2) {return c1.getValue() - c2.getValue();});
       var dp = this.dp(amount, this.coins);
       console.log(dp);
 
