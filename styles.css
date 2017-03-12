@@ -134,6 +134,7 @@ form {
 	background-color: black;
 	color: white;
 	margin: 30px 0;
+    cursor: pointer;
 }
 
 /* height 2 short */
